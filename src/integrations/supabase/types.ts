@@ -14,7 +14,225 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      appointments: {
+        Row: {
+          created_at: string
+          duration_min: number
+          id: string
+          modality: string
+          owner_id: string
+          patient_id: string
+          price: number
+          start_at: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          duration_min?: number
+          id?: string
+          modality?: string
+          owner_id?: string
+          patient_id: string
+          price?: number
+          start_at: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          duration_min?: number
+          id?: string
+          modality?: string
+          owner_id?: string
+          patient_id?: string
+          price?: number
+          start_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      booking_requests: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string | null
+          name: string
+          owner_id: string
+          phone: string | null
+          preferred_at: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message?: string | null
+          name: string
+          owner_id: string
+          phone?: string | null
+          preferred_at: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string | null
+          name?: string
+          owner_id?: string
+          phone?: string | null
+          preferred_at?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      patients: {
+        Row: {
+          active: boolean
+          birth_date: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          notes: string | null
+          owner_id: string
+          phone: string | null
+          reason: string | null
+        }
+        Insert: {
+          active?: boolean
+          birth_date?: string | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          notes?: string | null
+          owner_id?: string
+          phone?: string | null
+          reason?: string | null
+        }
+        Update: {
+          active?: boolean
+          birth_date?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          notes?: string | null
+          owner_id?: string
+          phone?: string | null
+          reason?: string | null
+        }
+        Relationships: []
+      }
+      payments: {
+        Row: {
+          amount: number
+          concept: string
+          created_at: string
+          id: string
+          method: string
+          owner_id: string
+          paid_at: string
+          patient_id: string
+        }
+        Insert: {
+          amount: number
+          concept?: string
+          created_at?: string
+          id?: string
+          method?: string
+          owner_id?: string
+          paid_at?: string
+          patient_id: string
+        }
+        Update: {
+          amount?: number
+          concept?: string
+          created_at?: string
+          id?: string
+          method?: string
+          owner_id?: string
+          paid_at?: string
+          patient_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string
+          id: string
+          session_price: number
+          specialty: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string
+          id: string
+          session_price?: number
+          specialty?: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          id?: string
+          session_price?: number
+          specialty?: string
+        }
+        Relationships: []
+      }
+      session_notes: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          owner_id: string
+          patient_id: string
+          title: string
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          id?: string
+          owner_id?: string
+          patient_id: string
+          title?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          owner_id?: string
+          patient_id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "session_notes_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
