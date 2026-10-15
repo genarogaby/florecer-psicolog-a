@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { appointmentsQ, patientsQ } from "@/lib/queries";
+import { appointmentsQ, patientsQ, profileQ } from "@/lib/queries";
 import { PageHeader, Panel, StatusBadge } from "@/components/PageHeader";
 import { NativeSelect } from "@/components/NativeSelect";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,8 @@ function Agenda() {
   const qc = useQueryClient();
   const { data: appts = [] } = useQuery(appointmentsQ);
   const { data: patients = [] } = useQuery(patientsQ);
+  const { userId } = Route.useRouteContext();
+  const { data: profile } = useQuery(profileQ(userId));
   const [week, setWeek] = useState(() => startOfWeek(new Date()));
   const [open, setOpen] = useState(false);
   const days = useMemo(() => Array.from({ length: 7 }, (_, i) => { const d = new Date(week); d.setDate(d.getDate() + i); return d; }), [week]);
@@ -74,7 +76,7 @@ function Agenda() {
                   <div><Label>Fecha y hora</Label><Input name="start_at" type="datetime-local" required /></div>
                   <div className="grid grid-cols-3 gap-2">
                     <div><Label>Minutos</Label><Input name="duration_min" type="number" defaultValue={50} /></div>
-                    <div><Label>Precio</Label><Input name="price" type="number" defaultValue={800} /></div>
+                    <div><Label>Precio</Label><Input key={profile?.session_price ?? 800} name="price" type="number" defaultValue={profile?.session_price ?? 800} /></div>
                     <div><Label>Modalidad</Label><NativeSelect name="modality"><option>presencial</option><option>en línea</option></NativeSelect></div>
                   </div>
                   <Button className="w-full">Guardar</Button>

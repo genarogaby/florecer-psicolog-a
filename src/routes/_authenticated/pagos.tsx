@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { patientsQ, paymentsQ } from "@/lib/queries";
+import { patientsQ, paymentsQ, profileQ } from "@/lib/queries";
 import { PageHeader, Panel } from "@/components/PageHeader";
 import { NativeSelect } from "@/components/NativeSelect";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,8 @@ function Pagos() {
   const qc = useQueryClient();
   const { data: pays = [] } = useQuery(paymentsQ);
   const { data: patients = [] } = useQuery(patientsQ);
+  const { userId } = Route.useRouteContext();
+  const { data: profile } = useQuery(profileQ(userId));
   const [open, setOpen] = useState(false);
   const total = pays.reduce((s, p) => s + Number(p.amount), 0);
 
@@ -49,7 +51,7 @@ function Pagos() {
               <form onSubmit={create} className="space-y-3">
                 <div><Label>Paciente</Label><NativeSelect name="patient_id" required>{patients.map((p) => <option key={p.id} value={p.id}>{p.full_name}</option>)}</NativeSelect></div>
                 <div className="grid grid-cols-2 gap-2">
-                  <div><Label>Monto</Label><Input name="amount" type="number" step="0.01" required defaultValue={800} /></div>
+                  <div><Label>Monto</Label><Input key={profile?.session_price ?? 800} name="amount" type="number" step="0.01" required defaultValue={profile?.session_price ?? 800} /></div>
                   <div><Label>Fecha</Label><Input name="paid_at" type="date" required defaultValue={new Date().toISOString().slice(0, 10)} /></div>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
