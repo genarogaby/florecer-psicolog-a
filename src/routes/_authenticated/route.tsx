@@ -1,6 +1,6 @@
 import { createFileRoute, Link, Outlet, redirect, useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
-import { LayoutDashboard, CalendarDays, Users, Wallet, Inbox, LogOut } from "lucide-react";
+import { LayoutDashboard, CalendarDays, Users, Wallet, Inbox, Settings, LogOut } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
@@ -18,6 +18,7 @@ const nav = [
   { to: "/pacientes", label: "Pacientes", icon: Users },
   { to: "/pagos", label: "Pagos", icon: Wallet },
   { to: "/solicitudes", label: "Portal", icon: Inbox },
+  { to: "/ajustes", label: "Ajustes", icon: Settings },
 ] as const;
 
 function Layout() {
