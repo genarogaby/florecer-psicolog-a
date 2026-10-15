@@ -22,7 +22,7 @@ function Solicitudes() {
 
   async function accept(r: Req) {
     const { data: pat, error } = await supabase.from("patients").insert({ full_name: r.name, email: r.email, phone: r.phone, reason: r.message }).select().single();
-    if (error || !pat) return toast.error("No se pudo aceptar");
+    if (error || !pat) { toast.error("No se pudo aceptar"); return; }
     await supabase.from("appointments").insert({ patient_id: pat.id, start_at: r.preferred_at, price: 800 });
     await supabase.from("booking_requests").update({ status: "aceptada" }).eq("id", r.id);
     toast.success("Paciente creado y cita agendada");

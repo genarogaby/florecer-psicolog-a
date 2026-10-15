@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { fields } from "@/lib/format";
 
 export const Route = createFileRoute("/reservar/$id")({
   head: () => ({
@@ -30,12 +31,12 @@ function Reservar() {
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const f = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
+    const f = fields(e.currentTarget, ["name","email","phone","preferred_at","message"]);
     const { error } = await supabase.from("booking_requests").insert({
       owner_id: id, name: f.name, email: f.email, phone: f.phone || null,
       preferred_at: new Date(f.preferred_at).toISOString(), message: f.message || null,
     });
-    if (error) return toast.error("No se pudo enviar la solicitud");
+    if (error) { toast.error("No se pudo enviar la solicitud"); return; }
     setSent(true);
   }
 

@@ -41,7 +41,7 @@ function Agenda() {
       modality: String(f.get("modality")),
       price: Number(f.get("price")),
     });
-    if (error) return toast.error("No se pudo crear la cita");
+    if (error) { toast.error("No se pudo crear la cita"); return; }
     toast.success("Cita agendada");
     setOpen(false);
     qc.invalidateQueries({ queryKey: ["appointments"] });

@@ -13,3 +13,8 @@ export function balance(payments: { amount: number }[], appts: { price: number; 
   const charged = appts.filter((a) => a.status === "completada").reduce((s, a) => s + Number(a.price), 0);
   return paid - charged;
 }
+
+export function fields<K extends string>(form: HTMLFormElement, keys: K[]): Record<K, string> {
+  const fd = new FormData(form);
+  return Object.fromEntries(keys.map((k) => [k, String(fd.get(k) ?? "")])) as Record<K, string>;
+}

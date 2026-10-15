@@ -34,7 +34,7 @@ function Expediente() {
     const form = e.currentTarget;
     const f = new FormData(form);
     const { error } = await supabase.from("session_notes").insert({ patient_id: id, title: String(f.get("title")) || "Nota de sesión", content: String(f.get("content")) });
-    if (error) return toast.error("No se pudo guardar la nota");
+    if (error) { toast.error("No se pudo guardar la nota"); return; }
     form.reset();
     qc.invalidateQueries({ queryKey: ["notes", id] });
   }

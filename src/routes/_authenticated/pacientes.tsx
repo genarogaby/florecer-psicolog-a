@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "sonner";
+import { fields } from "@/lib/format";
 
 export const Route = createFileRoute("/_authenticated/pacientes")({
   head: () => ({ meta: [{ title: "Pacientes — Sereno" }, { name: "description", content: "Lista de pacientes y expedientes." }] }),
@@ -24,12 +25,12 @@ function Pacientes() {
 
   async function create(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const f = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
+    const f = fields(e.currentTarget, ["full_name","email","phone","birth_date","reason"]);
     const { error } = await supabase.from("patients").insert({
       full_name: f.full_name, email: f.email || null, phone: f.phone || null,
       birth_date: f.birth_date || null, reason: f.reason || null,
     });
-    if (error) return toast.error("No se pudo guardar");
+    if (error) { toast.error("No se pudo guardar"); return; }
     toast.success("Paciente registrado");
     setOpen(false);
     qc.invalidateQueries({ queryKey: ["patients"] });

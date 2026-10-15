@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { dateOnly, money } from "@/lib/format";
+import { dateOnly, money, fields } from "@/lib/format";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/pagos")({
@@ -26,11 +26,11 @@ function Pagos() {
 
   async function create(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const f = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
+    const f = fields(e.currentTarget, ["patient_id","amount","method","concept","paid_at"]);
     const { error } = await supabase.from("payments").insert({
       patient_id: f.patient_id, amount: Number(f.amount), method: f.method, concept: f.concept || "Sesión", paid_at: f.paid_at,
     });
-    if (error) return toast.error("No se pudo registrar el pago");
+    if (error) { toast.error("No se pudo registrar el pago"); return; }
     toast.success("Pago registrado");
     setOpen(false);
     qc.invalidateQueries({ queryKey: ["payments"] });
