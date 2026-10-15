@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { requestsQ } from "@/lib/queries";
+import { requestsQ, profileQ } from "@/lib/queries";
 import { PageHeader, Panel, StatusBadge } from "@/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { dateTime } from "@/lib/format";
@@ -18,12 +18,13 @@ function Solicitudes() {
   const qc = useQueryClient();
   const { userId } = Route.useRouteContext();
   const { data: reqs = [] } = useQuery(requestsQ);
+  const { data: profile } = useQuery(profileQ(userId));
   const link = typeof window !== "undefined" ? `${window.location.origin}/reservar/${userId}` : "";
 
   async function accept(r: Req) {
     const { data: pat, error } = await supabase.from("patients").insert({ full_name: r.name, email: r.email, phone: r.phone, reason: r.message }).select().single();
     if (error || !pat) { toast.error("No se pudo aceptar"); return; }
-    await supabase.from("appointments").insert({ patient_id: pat.id, start_at: r.preferred_at, price: 800 });
+    await supabase.from("appointments").insert({ patient_id: pat.id, start_at: r.preferred_at, price: profile?.session_price ?? 800 });
     await supabase.from("booking_requests").update({ status: "aceptada" }).eq("id", r.id);
     toast.success("Paciente creado y cita agendada");
     qc.invalidateQueries();
