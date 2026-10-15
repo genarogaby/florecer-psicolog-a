@@ -36,5 +36,9 @@ export const notesQ = (patientId: string) =>
 export const profileQ = (id: string) =>
   queryOptions({
     queryKey: ["profile", id],
-    queryFn: () => run(supabase.from("profiles").select("*").eq("id", id).maybeSingle()),
+    queryFn: async () => {
+      const { data, error } = await supabase.from("profiles").select("*").eq("id", id).maybeSingle();
+      if (error) throw error;
+      return data;
+    },
   });
