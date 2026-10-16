@@ -23,10 +23,8 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const nav = useNavigate();
-  const [mode, setMode] = useState<"in" | "up">("in");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
@@ -36,18 +34,9 @@ function AuthPage() {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true);
-    if (mode === "in") {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) toast.error("Correo o contraseña incorrectos");
-      else nav({ to: "/panel" });
-    } else {
-      const { error } = await supabase.auth.signUp({
-        email, password,
-        options: { emailRedirectTo: window.location.origin + "/panel", data: { full_name: name } },
-      });
-      if (error) toast.error(error.message);
-      else toast.success("Revisa tu correo para confirmar tu cuenta");
-    }
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) toast.error("Correo o contraseña incorrectos");
+    else nav({ to: "/panel" });
     setBusy(false);
   }
 
@@ -64,17 +53,11 @@ function AuthPage() {
       </div>
       <div className="flex items-center justify-center p-6">
         <form onSubmit={submit} className="w-full max-w-sm space-y-4">
-          <h2 className="text-3xl">{mode === "in" ? "Iniciar sesión" : "Crear cuenta"}</h2>
-          {mode === "up" && (
-            <div className="space-y-1"><Label>Nombre</Label><Input required value={name} onChange={(e) => setName(e.target.value)} /></div>
-          )}
+          <h2 className="text-3xl">Iniciar sesión</h2>
           <div className="space-y-1"><Label>Correo</Label><Input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} /></div>
           <div className="space-y-1"><Label>Contraseña</Label><Input type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} /></div>
-          <Button className="w-full" disabled={busy}>{mode === "in" ? "Entrar" : "Registrarme"}</Button>
+          <Button className="w-full" disabled={busy}>Entrar</Button>
           <Button type="button" variant="outline" className="w-full" onClick={google}>Continuar con Google</Button>
-          <button type="button" className="text-sm text-muted-foreground underline" onClick={() => setMode(mode === "in" ? "up" : "in")}>
-            {mode === "in" ? "¿No tienes cuenta? Regístrate" : "¿Ya tienes cuenta? Inicia sesión"}
-          </button>
         </form>
       </div>
     </div>
