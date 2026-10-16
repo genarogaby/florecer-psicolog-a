@@ -1,8 +1,13 @@
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { LayoutDashboard, CalendarDays, Users, Wallet, Inbox, Settings } from "lucide-react";
 
+// Perfil único de la consulta: la app no usa cuentas, todos los datos
+// pertenecen a este identificador fijo.
+export const OWNER_ID = "00000000-0000-0000-0000-000000000001";
+
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
+  beforeLoad: () => ({ userId: OWNER_ID }),
   component: Layout,
 });
 
