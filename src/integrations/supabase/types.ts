@@ -20,7 +20,7 @@ export type Database = {
           duration_min: number
           id: string
           modality: string
-          owner_id: string
+          owner_id: string | null
           patient_id: string
           price: number
           start_at: string
@@ -31,7 +31,7 @@ export type Database = {
           duration_min?: number
           id?: string
           modality?: string
-          owner_id?: string
+          owner_id?: string | null
           patient_id: string
           price?: number
           start_at: string
@@ -42,7 +42,7 @@ export type Database = {
           duration_min?: number
           id?: string
           modality?: string
-          owner_id?: string
+          owner_id?: string | null
           patient_id?: string
           price?: number
           start_at?: string
@@ -65,7 +65,7 @@ export type Database = {
           id: string
           message: string | null
           name: string
-          owner_id: string
+          owner_id: string | null
           phone: string | null
           preferred_at: string
           status: string
@@ -76,7 +76,7 @@ export type Database = {
           id?: string
           message?: string | null
           name: string
-          owner_id: string
+          owner_id?: string | null
           phone?: string | null
           preferred_at: string
           status?: string
@@ -87,7 +87,7 @@ export type Database = {
           id?: string
           message?: string | null
           name?: string
-          owner_id?: string
+          owner_id?: string | null
           phone?: string | null
           preferred_at?: string
           status?: string
@@ -103,7 +103,7 @@ export type Database = {
           full_name: string
           id: string
           notes: string | null
-          owner_id: string
+          owner_id: string | null
           phone: string | null
           reason: string | null
         }
@@ -115,7 +115,7 @@ export type Database = {
           full_name: string
           id?: string
           notes?: string | null
-          owner_id?: string
+          owner_id?: string | null
           phone?: string | null
           reason?: string | null
         }
@@ -127,7 +127,7 @@ export type Database = {
           full_name?: string
           id?: string
           notes?: string | null
-          owner_id?: string
+          owner_id?: string | null
           phone?: string | null
           reason?: string | null
         }
@@ -140,7 +140,7 @@ export type Database = {
           created_at: string
           id: string
           method: string
-          owner_id: string
+          owner_id: string | null
           paid_at: string
           patient_id: string
         }
@@ -150,7 +150,7 @@ export type Database = {
           created_at?: string
           id?: string
           method?: string
-          owner_id?: string
+          owner_id?: string | null
           paid_at?: string
           patient_id: string
         }
@@ -160,7 +160,7 @@ export type Database = {
           created_at?: string
           id?: string
           method?: string
-          owner_id?: string
+          owner_id?: string | null
           paid_at?: string
           patient_id?: string
         }
@@ -203,7 +203,7 @@ export type Database = {
           content: string
           created_at: string
           id: string
-          owner_id: string
+          owner_id: string | null
           patient_id: string
           title: string
         }
@@ -211,7 +211,7 @@ export type Database = {
           content?: string
           created_at?: string
           id?: string
-          owner_id?: string
+          owner_id?: string | null
           patient_id: string
           title?: string
         }
@@ -219,7 +219,7 @@ export type Database = {
           content?: string
           created_at?: string
           id?: string
-          owner_id?: string
+          owner_id?: string | null
           patient_id?: string
           title?: string
         }
