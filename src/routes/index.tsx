@@ -5,9 +5,9 @@ import { CalendarDays, FileText, Wallet, Globe } from "lucide-react";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sereno — Software para psicólogos" },
+      { title: "Flore-ser Psicología — Software para psicólogos" },
       { name: "description", content: "Agenda, expedientes clínicos, cobros y portal de reservas en línea para tu consulta." },
-      { property: "og:title", content: "Sereno — Software para psicólogos" },
+      { property: "og:title", content: "Flore-ser Psicología — Software para psicólogos" },
       { property: "og:description", content: "Gestiona tu consulta de psicología en un solo lugar." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -28,7 +28,7 @@ function Index() {
     <div className="min-h-screen">
       <section className="bg-hero text-sidebar-foreground">
         <div className="mx-auto max-w-6xl px-6 py-6 flex items-center justify-between">
-          <span className="font-display text-2xl">Sereno</span>
+          <span className="font-display text-2xl">Flore-ser Psicología</span>
           <Button asChild variant="secondary"><Link to="/auth">Entrar</Link></Button>
         </div>
         <div className="mx-auto max-w-6xl px-6 pt-16 pb-28">

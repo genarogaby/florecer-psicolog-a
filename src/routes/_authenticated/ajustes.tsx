@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/ajustes")({
-  head: () => ({ meta: [{ title: "Ajustes — Sereno" }, { name: "description", content: "Configuración de tu consulta." }] }),
+  head: () => ({ meta: [{ title: "Ajustes — Flore-ser Psicología" }, { name: "description", content: "Configuración de tu consulta." }] }),
   component: Ajustes,
 });
 

@@ -58,7 +58,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Sereno — Software para psicólogos" },
+      { title: "Flore-ser Psicología — Software para psicólogos" },
       { name: "description", content: "Agenda, expedientes clínicos, cobros y portal de citas para psicólogos." },
     ],
     links: [

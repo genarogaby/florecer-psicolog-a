@@ -8,7 +8,7 @@ import { dateTime } from "@/lib/format";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/solicitudes")({
-  head: () => ({ meta: [{ title: "Portal del paciente — Sereno" }, { name: "description", content: "Solicitudes de cita en línea." }] }),
+  head: () => ({ meta: [{ title: "Portal del paciente — Flore-ser Psicología" }, { name: "description", content: "Solicitudes de cita en línea." }] }),
   component: Solicitudes,
 });
 

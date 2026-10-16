@@ -13,7 +13,7 @@ import { dateOnly, money, fields } from "@/lib/format";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/pagos")({
-  head: () => ({ meta: [{ title: "Pagos — Sereno" }, { name: "description", content: "Registro de pagos y cobros." }] }),
+  head: () => ({ meta: [{ title: "Pagos — Flore-ser Psicología" }, { name: "description", content: "Registro de pagos y cobros." }] }),
   component: Pagos,
 });
 
