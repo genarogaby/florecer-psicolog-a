@@ -26,7 +26,7 @@ function Layout() {
   return (
     <div className="min-h-screen md:flex">
       <aside className="bg-sidebar text-sidebar-foreground md:w-60 md:min-h-screen flex md:flex-col p-3 gap-1 overflow-x-auto">
-        <div className="hidden md:block font-display text-2xl px-3 py-4">Sereno</div>
+        <div className="hidden md:block font-display text-2xl px-3 py-4">Flore-ser Psicología</div>
         {nav.map((n) => (
           <Link
             key={n.to}

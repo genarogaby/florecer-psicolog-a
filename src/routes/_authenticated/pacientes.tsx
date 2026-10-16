@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { fields } from "@/lib/format";
 
 export const Route = createFileRoute("/_authenticated/pacientes")({
-  head: () => ({ meta: [{ title: "Pacientes — Sereno" }, { name: "description", content: "Lista de pacientes y expedientes." }] }),
+  head: () => ({ meta: [{ title: "Pacientes — Flore-ser Psicología" }, { name: "description", content: "Lista de pacientes y expedientes." }] }),
   component: Pacientes,
 });
 

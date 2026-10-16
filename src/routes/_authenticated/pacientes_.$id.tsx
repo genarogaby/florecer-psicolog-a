@@ -11,7 +11,7 @@ import { balance, dateOnly, dateTime, money } from "@/lib/format";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/pacientes_/$id")({
-  head: () => ({ meta: [{ title: "Expediente — Sereno" }, { name: "description", content: "Expediente clínico del paciente." }] }),
+  head: () => ({ meta: [{ title: "Expediente — Flore-ser Psicología" }, { name: "description", content: "Expediente clínico del paciente." }] }),
   component: Expediente,
 });
 

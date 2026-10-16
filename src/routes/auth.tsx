@@ -10,10 +10,10 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Entrar — Sereno" },
-      { name: "description", content: "Accede a tu consulta en Sereno." },
-      { property: "og:title", content: "Entrar — Sereno" },
-      { property: "og:description", content: "Accede a tu consulta en Sereno." },
+      { title: "Entrar — Flore-ser Psicología" },
+      { name: "description", content: "Accede a tu consulta en Flore-ser Psicología." },
+      { property: "og:title", content: "Entrar — Flore-ser Psicología" },
+      { property: "og:description", content: "Accede a tu consulta en Flore-ser Psicología." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -60,7 +60,7 @@ function AuthPage() {
   return (
     <div className="min-h-screen grid md:grid-cols-2">
       <div className="hidden md:flex bg-hero text-sidebar-foreground p-12 items-end">
-        <h1 className="text-5xl leading-tight">Bienvenido a<br />Sereno.</h1>
+        <h1 className="text-5xl leading-tight">Bienvenido a<br />Flore-ser Psicología.</h1>
       </div>
       <div className="flex items-center justify-center p-6">
         <form onSubmit={submit} className="w-full max-w-sm space-y-4">

@@ -13,7 +13,7 @@ import { fields } from "@/lib/format";
 export const Route = createFileRoute("/reservar/$id")({
   head: () => ({
     meta: [
-      { title: "Solicitar cita — Sereno" },
+      { title: "Solicitar cita — Flore-ser Psicología" },
       { name: "description", content: "Solicita una cita con tu psicólogo en línea." },
       { property: "og:title", content: "Solicitar cita" },
       { property: "og:description", content: "Solicita una cita con tu psicólogo en línea." },
