@@ -1,14 +1,8 @@
-import { createFileRoute, Link, Outlet, redirect, useNavigate } from "@tanstack/react-router";
-import { supabase } from "@/integrations/supabase/client";
-import { LayoutDashboard, CalendarDays, Users, Wallet, Inbox, Settings, LogOut } from "lucide-react";
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+import { LayoutDashboard, CalendarDays, Users, Wallet, Inbox, Settings } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
-  beforeLoad: async () => {
-    const { data } = await supabase.auth.getUser();
-    if (!data.user) throw redirect({ to: "/auth" });
-    return { userId: data.user.id };
-  },
   component: Layout,
 });
 
@@ -22,7 +16,6 @@ const nav = [
 ] as const;
 
 function Layout() {
-  const navigate = useNavigate();
   return (
     <div className="min-h-screen md:flex">
       <aside className="bg-sidebar text-sidebar-foreground md:w-60 md:min-h-screen flex md:flex-col p-3 gap-1 overflow-x-auto">
@@ -37,12 +30,6 @@ function Layout() {
             <n.icon className="h-4 w-4" /> {n.label}
           </Link>
         ))}
-        <button
-          onClick={async () => { await supabase.auth.signOut(); navigate({ to: "/auth" }); }}
-          className="md:mt-auto flex items-center gap-3 rounded-lg px-3 py-2 text-sm hover:bg-sidebar-accent shrink-0"
-        >
-          <LogOut className="h-4 w-4" /> Salir
-        </button>
       </aside>
       <main className="flex-1 p-6 md:p-10 max-w-6xl">
         <Outlet />
