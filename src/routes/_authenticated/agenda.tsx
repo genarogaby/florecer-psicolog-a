@@ -13,7 +13,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/agenda")({
-  head: () => ({ meta: [{ title: "Agenda — Sereno" }, { name: "description", content: "Agenda semanal de citas." }] }),
+  head: () => ({ meta: [{ title: "Agenda — Flore-ser Psicología" }, { name: "description", content: "Agenda semanal de citas." }] }),
   component: Agenda,
 });
 

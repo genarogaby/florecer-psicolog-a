@@ -5,7 +5,7 @@ import { PageHeader, Panel, StatusBadge } from "@/components/PageHeader";
 import { dateTime, money } from "@/lib/format";
 
 export const Route = createFileRoute("/_authenticated/panel")({
-  head: () => ({ meta: [{ title: "Panel — Sereno" }, { name: "description", content: "Resumen de tu consulta." }] }),
+  head: () => ({ meta: [{ title: "Panel — Flore-ser Psicología" }, { name: "description", content: "Resumen de tu consulta." }] }),
   component: PanelPage,
 });
 
