@@ -51,3 +51,31 @@ function Ajustes() {
     </>
   );
 }
+
+function ThemePanel() {
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
+  }, []);
+
+  function toggle() {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.classList.toggle("dark", next);
+    localStorage.setItem("theme", next ? "dark" : "light");
+  }
+
+  return (
+    <Panel className="max-w-md mt-6">
+      <h3 className="text-lg mb-1">Apariencia</h3>
+      <p className="text-sm text-muted-foreground mb-4">
+        Cambia entre tema claro y oscuro. Tu preferencia se guarda en este navegador.
+      </p>
+      <Button type="button" variant="outline" onClick={toggle} className="gap-2">
+        {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+        {dark ? "Cambiar a tema claro" : "Cambiar a tema oscuro"}
+      </Button>
+    </Panel>
+  );
+}
