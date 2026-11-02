@@ -47,6 +47,7 @@ function Ajustes() {
           <Button>Guardar</Button>
         </form>
       </Panel>
+      <ThemePanel />
     </>
   );
 }
